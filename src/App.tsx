@@ -189,8 +189,7 @@ const IdleEmpireGame = () => {
     setBusinesses(prev => prev.map(b => b.id === businessId ? { ...b, owned: b.owned + 1 } : b)); 
 
     // --- CALCULATE MILESTONES ---
-      const milestones = [10, 25, 50, 75, 100, 150, 200];
-      const nextMilestone = milestones.find(m => m >= newOwnedCount);
+      
       // ----------------------------
     
     // 1. CAPTURE STATE BEFORE UPDATE
