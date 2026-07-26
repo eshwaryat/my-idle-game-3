@@ -86,16 +86,16 @@ const IdleEmpireGame = () => {
   };
 
   const businessTypes: BusinessType[] = [ // experimental increment in baseRevenue from 0.75 to 1.00
-    { id: 'lemonade', name: 'Lemonade Stand', baseCost: 4, baseRevenue: 1.00, baseTime: 2000, icon: '🍋', description: 'Your first venture!', costMultiplier: 1.15, upgradeBonus: 1.5, managerCost: 1000, upgradeCostMultiplier: 5 },
-    { id: 'newspaper', name: 'Newspaper Route', baseCost: 80, baseRevenue:10.0, baseTime: 4000, icon: '📰', description: 'Deliver news!', costMultiplier: 1.14, upgradeBonus: 1.5, managerCost: 5000, upgradeCostMultiplier: 4.5},
-    { id: 'carwash', name: 'Car Wash', baseCost: 1600, baseRevenue: 100, baseTime: 6000, icon: '🚗', description: 'Shine wheels!', costMultiplier: 1.13, upgradeBonus: 1.5, managerCost: 25000, upgradeCostMultiplier: 4.0 },
-    { id: 'pizza', name: 'Pizza Delivery', baseCost: 32000, baseRevenue: 1000, baseTime: 8000, icon: '🍕', description: 'Hot profits!', costMultiplier: 1.12, upgradeBonus: 1.5, managerCost: 150000, upgradeCostMultiplier: 3.5 },
-    { id: 'arcade', name: 'Arcade', baseCost: 640000, baseRevenue: 10000, baseTime: 10000, icon: '🎮', description: 'High scores!', costMultiplier: 1.11, upgradeBonus: 1.5, managerCost: 1000000, upgradeCostMultiplier: 3.0 },
-    { id: 'cinema', name: 'Movie Theater', baseCost: 12800000, baseRevenue: 100000, baseTime: 12000, icon: '🎬', description: 'Blockbusters!', costMultiplier: 1.10, upgradeBonus: 1.5, managerCost: 10000000, upgradeCostMultiplier: 2.8 },
-    { id: 'bank', name: 'Bank', baseCost: 128000000, baseRevenue: 1000000, baseTime: 14000, icon: '🏦', description: 'Money begets money!', costMultiplier: 1.09, upgradeBonus: 1.5, managerCost: 100000000, upgradeCostMultiplier: 2.6 },
-    { id: 'oilrig', name: 'Oil Company', baseCost: 128000000, baseRevenue: 10000000, baseTime: 16000, icon: '🛢️', description: 'Black gold!', costMultiplier: 1.08, upgradeBonus: 1.5, managerCost: 1000000000, upgradeCostMultiplier: 2.4 },
-    { id: 'airline', name: 'Airline', baseCost: 12800000000, baseRevenue: 100000000, baseTime: 18000, icon: '✈️', description: 'Sky high!', costMultiplier: 1.07, upgradeBonus: 1.5, managerCost: 15000000000, upgradeCostMultiplier: 2.2 },
-    { id: 'spacestation', name: 'Space Station', baseCost: 128000000000, baseRevenue: 1000000000, baseTime: 20000, icon: '🚀', description: 'To infinity!', costMultiplier: 1.06, upgradeBonus: 1.5, managerCost: 200000000000, upgradeCostMultiplier: 2.0 }
+    { id: 'lemonade', name: 'Lemonade Stand', baseCost: 4, baseRevenue: 1.00, baseTime: 2000, icon: '🍋', description: 'Your first venture!', costMultiplier: 1.15, upgradeBonus: 1.35, managerCost: 1000, upgradeCostMultiplier: 5 },
+    { id: 'newspaper', name: 'Newspaper Route', baseCost: 80, baseRevenue:10.0, baseTime: 4000, icon: '📰', description: 'Deliver news!', costMultiplier: 1.14, upgradeBonus: 1.35, managerCost: 5000, upgradeCostMultiplier: 4.5},
+    { id: 'carwash', name: 'Car Wash', baseCost: 1600, baseRevenue: 100, baseTime: 6000, icon: '🚗', description: 'Shine wheels!', costMultiplier: 1.13, upgradeBonus: 1.35, managerCost: 25000, upgradeCostMultiplier: 4.0 },
+    { id: 'pizza', name: 'Pizza Delivery', baseCost: 32000, baseRevenue: 1000, baseTime: 8000, icon: '🍕', description: 'Hot profits!', costMultiplier: 1.12, upgradeBonus: 1.35, managerCost: 150000, upgradeCostMultiplier: 3.5 },
+    { id: 'arcade', name: 'Arcade', baseCost: 640000, baseRevenue: 10000, baseTime: 10000, icon: '🎮', description: 'High scores!', costMultiplier: 1.11, upgradeBonus: 1.35, managerCost: 1000000, upgradeCostMultiplier: 3.0 },
+    { id: 'cinema', name: 'Movie Theater', baseCost: 12800000, baseRevenue: 100000, baseTime: 12000, icon: '🎬', description: 'Blockbusters!', costMultiplier: 1.10, upgradeBonus: 1.35, managerCost: 10000000, upgradeCostMultiplier: 2.8 },
+    { id: 'bank', name: 'Bank', baseCost: 128000000, baseRevenue: 1000000, baseTime: 14000, icon: '🏦', description: 'Money begets money!', costMultiplier: 1.09, upgradeBonus: 1.35, managerCost: 100000000, upgradeCostMultiplier: 2.6 },
+    { id: 'oilrig', name: 'Oil Company', baseCost: 128000000, baseRevenue: 10000000, baseTime: 16000, icon: '🛢️', description: 'Black gold!', costMultiplier: 1.08, upgradeBonus: 1.35, managerCost: 1000000000, upgradeCostMultiplier: 2.4 },
+    { id: 'airline', name: 'Airline', baseCost: 12800000000, baseRevenue: 100000000, baseTime: 18000, icon: '✈️', description: 'Sky high!', costMultiplier: 1.07, upgradeBonus: 1.35, managerCost: 15000000000, upgradeCostMultiplier: 2.2 },
+    { id: 'spacestation', name: 'Space Station', baseCost: 128000000000, baseRevenue: 1000000000, baseTime: 20000, icon: '🚀', description: 'To infinity!', costMultiplier: 1.06, upgradeBonus: 1.35, managerCost: 200000000000, upgradeCostMultiplier: 2.0 }
   ];
 
   const initialBusinesses = businessTypes.map(b => ({ ...b, owned: 0, totalRevenue: 0, progress: 0, isRunning: false, upgradeLevel: 0, totalProduced: 0, hasManager: false }));
