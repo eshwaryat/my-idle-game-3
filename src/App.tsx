@@ -26,7 +26,6 @@ interface Business extends BusinessType {
   hasManager: boolean;
 }
 
-interface Dialogue { id: number; message: string; }
 interface Achievement { id: string; name: string; description: string; icon: string; }
 interface DisplayedAchievement extends Achievement { timestamp: number; }
 interface EventLogEntry { timestamp: number; sessionTime: number; eventType: string; [key: string]: any; }
@@ -52,7 +51,6 @@ const IdleEmpireGame = () => {
   const totalEarnedRef = useRef(totalEarned);
   const lifetimeEarnedRef = useRef(lifetimeEarned);
 
-  const [dialogues, setDialogues] = useState<Dialogue[]>([]);
   const [achievements, setAchievements] = useState<DisplayedAchievement[]>([]);
   const [unlockedAchievements, setUnlockedAchievements] = useState(new Set<string>());
   const [ascensionCount, setAscensionCount] = useState(0);
@@ -87,20 +85,6 @@ const IdleEmpireGame = () => {
     } catch (error) { console.log('Audio error:', error); }
   };
 
-  // const businessTypes: BusinessType[] = [
-  //   { id: 'lemonade', name: 'Lemonade Stand', baseCost: 4, baseRevenue: 0.75, baseTime: 2000, icon: '🍋', description: 'Your first venture!', costMultiplier: 1.15, upgradeBonus: 1.5, managerCost: 1000, upgradeCostMultiplier: 5 },
-  //   { id: 'newspaper', name: 'Newspaper Route', baseCost: 80, baseRevenue:7.5, baseTime: 4000, icon: '📰', description: 'Deliver news!', costMultiplier: 1.14, upgradeBonus: 1.5, managerCost: 5000, upgradeCostMultiplier: 4.5},
-  //   { id: 'carwash', name: 'Car Wash', baseCost: 1600, baseRevenue: 75, baseTime: 6000, icon: '🚗', description: 'Shine wheels!', costMultiplier: 1.13, upgradeBonus: 1.5, managerCost: 25000, upgradeCostMultiplier: 4.0 },
-  //   { id: 'pizza', name: 'Pizza Delivery', baseCost: 32000, baseRevenue: 750, baseTime: 8000, icon: '🍕', description: 'Hot profits!', costMultiplier: 1.12, upgradeBonus: 1.5, managerCost: 150000, upgradeCostMultiplier: 3.5 },
-  //   { id: 'arcade', name: 'Arcade', baseCost: 640000, baseRevenue: 7500, baseTime: 10000, icon: '🎮', description: 'High scores!', costMultiplier: 1.11, upgradeBonus: 1.5, managerCost: 1000000, upgradeCostMultiplier: 3.0 },
-  //   { id: 'cinema', name: 'Movie Theater', baseCost: 12800000, baseRevenue: 75000, baseTime: 12000, icon: '🎬', description: 'Blockbusters!', costMultiplier: 1.10, upgradeBonus: 1.5, managerCost: 10000000, upgradeCostMultiplier: 2.8 },
-  //   { id: 'bank', name: 'Bank', baseCost: 128000000, baseRevenue: 750000, baseTime: 14000, icon: '🏦', description: 'Money begets money!', costMultiplier: 1.09, upgradeBonus: 1.5, managerCost: 100000000, upgradeCostMultiplier: 2.6 },
-  //   { id: 'oilrig', name: 'Oil Company', baseCost: 128000000, baseRevenue: 7500000, baseTime: 16000, icon: '🛢️', description: 'Black gold!', costMultiplier: 1.08, upgradeBonus: 1.5, managerCost: 1000000000, upgradeCostMultiplier: 2.4 },
-  //   { id: 'airline', name: 'Airline', baseCost: 12800000000, baseRevenue: 75000000, baseTime: 18000, icon: '✈️', description: 'Sky high!', costMultiplier: 1.07, upgradeBonus: 1.5, managerCost: 15000000000, upgradeCostMultiplier: 2.2 },
-  //   { id: 'spacestation', name: 'Space Station', baseCost: 128000000000, baseRevenue: 750000000, baseTime: 20000, icon: '🚀', description: 'To infinity!', costMultiplier: 1.06, upgradeBonus: 1.5, managerCost: 200000000000, upgradeCostMultiplier: 2.0 }
-  // ];
-
-  
   const businessTypes: BusinessType[] = [ // experimental increment in baseRevenue from 0.75 to 1.00
     { id: 'lemonade', name: 'Lemonade Stand', baseCost: 4, baseRevenue: 1.00, baseTime: 2000, icon: '🍋', description: 'Your first venture!', costMultiplier: 1.15, upgradeBonus: 1.5, managerCost: 1000, upgradeCostMultiplier: 5 },
     { id: 'newspaper', name: 'Newspaper Route', baseCost: 80, baseRevenue:10.0, baseTime: 4000, icon: '📰', description: 'Deliver news!', costMultiplier: 1.14, upgradeBonus: 1.5, managerCost: 5000, upgradeCostMultiplier: 4.5},
@@ -122,15 +106,6 @@ const IdleEmpireGame = () => {
   useEffect(() => { moneyRef.current = money; }, [money]);
   useEffect(() => { totalEarnedRef.current = totalEarned; }, [totalEarned]);
   useEffect(() => { lifetimeEarnedRef.current = lifetimeEarned; }, [lifetimeEarned]);
-
-  const characterDialogues = {
-    firstPurchase: [ "🎉 Your first business! The journey begins!", "💪 That's the spirit! Let's build something great!", "🌟 Every empire starts with a single step!" ],
-    unlockBusiness: { newspaper: "📰 Moving up in the world!", carwash: "🚗 Shiny profits ahead!", pizza: "🍕 Mama mia! Spicy move!", arcade: "🎮 Game on! High scores = high profits!", cinema: "🎬 Lights, camera, MONEY!", bank: "🏦 Playing with big money now!", oilrig: "🛢️ Strike oil, strike gold!", airline: "✈️ Sky's the limit!", spacestation: "🚀 TO THE MOON! You legend!" } as Record<string, string>,
-    milestones: [ "💰 Cha-ching!", "⚡ Keep hustling!", "🔥 You're on fire!", "😎 Empire's growing!", "🎯 Smart moves!", "⭐ Crushing it!" ],
-    firstManager: [ "👔 First manager! Automation time!", "🎩 Hired help!", "💼 That's how pros do it!" ],
-    upgrades: [ "📈 Upgraded! Efficiency up!", "⚙️ Turbocharged!", "🚀 Level up!" ],
-    ascension: [ "🌟 ASCENSION! You've transcended!", "✨ The universe resets, wisdom remains!", "🎆 Sacrifice brings greater power!" ]
-  };
    
   const achievementsList: Achievement[] = [ 
     { id: 'first_purchase', name: 'Entrepreneur', description: 'Buy your first business', icon: '🎯' }, 
@@ -167,9 +142,6 @@ const IdleEmpireGame = () => {
   eventLogRef.current.push({ ...event }); 
 };
 
-
-  const showDialogue = (message: string) => { const id = Date.now(); setDialogues(prev => [...prev, { id, message }]); setTimeout(() => { setDialogues(prev => prev.filter(d => d.id !== id)); }, 4000); };
-  
   const unlockAchievement = (achievementId: string) => { 
     if (!unlockedAchievements.has(achievementId)) { 
         const achievement = achievementsList.find(a => a.id === achievementId); 
@@ -211,50 +183,24 @@ const IdleEmpireGame = () => {
   if (money >= cost) { 
     playKachingSound();
     const newBal = money - cost; // Calculate exactly what the balance will be
-    const newOwnedCount = business.owned + 1; // Track what the new amount will be
 
     setMoney(newBal); 
     setBusinesses(prev => prev.map(b => b.id === businessId ? { ...b, owned: b.owned + 1 } : b)); 
 
-    // --- CALCULATE MILESTONES ---
-      const milestones = [10, 25, 50, 75, 100, 150, 200];
-      const nextMilestone = milestones.find(m => m >= newOwnedCount);
-      const awayFromMilestone = nextMilestone ? nextMilestone - newOwnedCount : null;
-      // ----------------------------
-    
     // 1. CAPTURE STATE BEFORE UPDATE
       const isFirstPurchase = businesses.every(b => b.owned === 0); 
       const isFirstOfType = business.owned === 0; 
       
-      // 2. DIALOGUE & ACHIEVEMENT LOGIC (INSERT THIS BLOCK)
+      // 2. ACHIEVEMENT LOGIC
       if (isFirstPurchase) { 
-        showDialogue(characterDialogues.firstPurchase[Math.floor(Math.random() * characterDialogues.firstPurchase.length)]); 
         unlockAchievement('first_purchase'); 
       } else if (isFirstOfType) { 
-        // Trigger specific dialogue for unlocking a new business type
-        if (characterDialogues.unlockBusiness[businessId]) {
-            showDialogue(characterDialogues.unlockBusiness[businessId]);
-        }
-        
         // Unlock specific achievements
         if (businessId === 'pizza') unlockAchievement('unlock_pizza'); 
         if (businessId === 'cinema') unlockAchievement('unlock_cinema'); 
         if (businessId === 'bank') unlockAchievement('unlock_bank'); 
         if (businessId === 'spacestation') unlockAchievement('unlock_space'); 
       } 
-      else if (awayFromMilestone === 0) {
-        // Exactly hit the milestone!
-        showDialogue(`🎉 BOOM! ${business.name} just got a multiplier bonus! 🚀`);
-      } 
-      // else if (awayFromMilestone !== null && (awayFromMilestone == 5)) { //||  awayFromMilestone == 3 || awayFromMilestone == 1)) {
-      //   // 5, 4, 3, 2, or 1 away from the next milestone
-      //   showDialogue(`Almost there! Just ${awayFromMilestone} more ${business.name}(s) for a multiplier boost!`);
-      // // =============================
-      // }
-      else if (Math.random() < 0.2) { 
-        // 20% chance to show a random "Keep hustling" message on standard purchases
-        showDialogue(characterDialogues.milestones[Math.floor(Math.random() * characterDialogues.milestones.length)]); 
-      }
 
     // Pass newBalance explicitly to logEvent
     logEvent('PURCHASE', { 
@@ -279,7 +225,6 @@ const IdleEmpireGame = () => {
       playKachingSound();
       setMoney(prev => prev - upgradeCost); 
       setBusinesses(prev => prev.map(b => b.id === businessId ? { ...b, upgradeLevel: b.upgradeLevel + 1 } : b)); 
-      if (Math.random() < 0.3) showDialogue(characterDialogues.upgrades[Math.floor(Math.random() * characterDialogues.upgrades.length)]); 
       
       logEvent('UPGRADE', { businessId, businessName: business.name, cost: upgradeCost, upgradeLevel: business.upgradeLevel + 1, newBalance: money - upgradeCost, mouseX, mouseY, reason: 'success' }); 
     } else {
@@ -299,7 +244,6 @@ const IdleEmpireGame = () => {
       setBusinesses(prev => prev.map(b => b.id === businessId ? { ...b, hasManager: true, isRunning: true } : b)); 
       
       if (isFirstManager) { 
-        showDialogue(characterDialogues.firstManager[Math.floor(Math.random() * characterDialogues.firstManager.length)]); 
         unlockAchievement('first_manager'); 
       } 
       
@@ -378,7 +322,6 @@ const IdleEmpireGame = () => {
       eventLogRef.current = [];
       setSessionStart(Date.now());
 
-      showDialogue(characterDialogues.ascension[Math.floor(Math.random() * characterDialogues.ascension.length)]);
       if (newAscensionCount === 1) unlockAchievement('first_ascension');
       if (newAscensionCount === 5) unlockAchievement('multi_ascension');
     }
@@ -514,9 +457,11 @@ const downloadData = () => {
   const unlockedAchievementDetails = achievementsList.filter(ach => unlockedAchievements.has(ach.id));
 
   // GLOBAL INCOME PER SECOND (sum of all businesses)
+  // Both managed and manually-run businesses count at their full rate.
+  // Idle (not running, no manager) businesses contribute nothing.
   const incomePerSecond = businesses.reduce((total, b) => {
-  // income only counts if a manager is hired
-  if (b.owned === 0 || !b.hasManager) return total;
+  if (b.owned === 0) return total;
+  if (!b.hasManager && !b.isRunning) return total;
 
   const revenue = calculateRevenue(b) * b.owned;
   const cycleTimeSec = calculateTime(b) / 1000;
@@ -591,9 +536,6 @@ const downloadData = () => {
       .animate-spacestation { animation: orbit-space 5s linear infinite; }
     `}</style>
     <div className="min-h-screen bg-slate-100 font-sans p-4 sm:p-6 lg:p-8">
-      <div className="fixed bottom-4 left-4 z-40 space-y-2 max-w-sm">
-        {dialogues.map(dialogue => (<div key={dialogue.id} className="bg-white rounded-xl shadow-2xl p-4 border-l-4 border-amber-400 animate-soft-popup"><div className="flex items-start gap-3"><div className="text-3xl mt-1">🤵</div><p className="text-slate-700 font-medium text-sm">{dialogue.message}</p></div></div>))}
-      </div>
       <div className="fixed top-4 right-4 z-40 space-y-2 max-w-sm">
         {achievements.map(achievement => (<div key={achievement.id} className="bg-gradient-to-br from-purple-600 to-blue-600 text-white rounded-xl shadow-2xl p-4 border-2 border-yellow-300 animate-soft-popup"><div className="flex items-center gap-3"><div className="text-4xl">{achievement.icon}</div><div className="flex-1"><p className="font-bold text-lg">Achievement Unlocked!</p><p className="font-semibold">{achievement.name}</p><p className="text-xs opacity-90">{achievement.description}</p></div></div></div>))}
       </div>
